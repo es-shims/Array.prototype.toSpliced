@@ -1,0 +1,33 @@
+{
+	"root": true,
+
+	"extends": "@ljharb",
+
+	"rules": {
+		"id-length": "off",
+		"new-cap": ["error", {
+			"capIsNewExceptions": [
+				"ArrayCreate",
+				"CreateDataPropertyOrThrow",
+				"Get",
+				"GetIntrinsic",
+				"LengthOfArrayLike",
+				"ToIntegerOrInfinity",
+				"ToObject",
+				"ToString",
+			],
+		}],
+	},
+
+	"overrides": [
+		{
+			"files": "test/tests.js",
+			"rules": {
+				"func-style": "off",
+				"max-len": "off",
+				"max-lines-per-function": "off",
+				"max-params": "off",
+			},
+		},
+	],
+}
