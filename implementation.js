@@ -16,6 +16,8 @@ var forEach = require('es-abstract/helpers/forEach');
 
 var max = GetIntrinsic('%Math.max%');
 var min = GetIntrinsic('%Math.min%');
+var $MAX_SAFE_INTEGER = require('es-abstract/helpers/maxSafeInteger');
+var $TypeError = GetIntrinsic('%TypeError%');
 
 var $slice = callBound('Array.prototype.slice');
 
@@ -48,22 +50,25 @@ module.exports = function toSpliced(start, deleteCount) {
 
 	var newLen = len + insertCount - actualDeleteCount; // step 11
 
-	var A = ArrayCreate(newLen); // step 12
-	var k = 0; // step 13
-	while (k < actualStart) { // step 14
+	if (newLen > $MAX_SAFE_INTEGER) {
+		throw new $TypeError('Length exceeded the maximum array length');
+	}
+	var A = ArrayCreate(newLen); // step 13
+	var k = 0; // step 14
+	while (k < actualStart) { // step 15
 		var Pk = ToString(k);
 		var kValue = Get(O, Pk);
 		CreateDataPropertyOrThrow(A, Pk, kValue);
 		k += 1;
 	}
 	/* eslint no-shadow: 1, no-redeclare: 1 */
-	forEach(items, function (E) { // step 15
+	forEach(items, function (E) { // step 16
 		var Pk = ToString(k);
 		CreateDataPropertyOrThrow(A, Pk, E);
 		k += 1;
 	});
 
-	while (k < newLen) { // step 16
+	while (k < newLen) { // step 17
 		var Pk = ToString(k);
 		var from = ToString(k + actualDeleteCount - insertCount);
 		var fromValue = Get(O, from);
@@ -71,5 +76,5 @@ module.exports = function toSpliced(start, deleteCount) {
 		k += 1;
 	}
 
-	return A; // step 17
+	return A; // step 18
 };

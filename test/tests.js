@@ -166,4 +166,20 @@ module.exports = function (toSpliced, t) {
 
 		st.end();
 	});
+
+	t.test('too-large length', function (st) {
+		st['throws'](
+			function () { toSpliced({ length: Math.pow(2, 53) - 1 }, 0, 0, 1); },
+			TypeError,
+			'throws the proper kind of error for >= 2**53'
+		);
+
+		st['throws'](
+			function () { toSpliced({ length: Math.pow(2, 32) - 1 }, 0, 0, 1); },
+			RangeError,
+			'throws the proper kind of error for [2**32, 2**53]'
+		);
+
+		st.end();
+	});
 };
