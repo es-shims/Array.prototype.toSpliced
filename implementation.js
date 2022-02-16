@@ -21,7 +21,7 @@ var $TypeError = GetIntrinsic('%TypeError%');
 
 var $slice = callBound('Array.prototype.slice');
 
-// eslint-disable-next-line max-statements
+// eslint-disable-next-line max-statements, max-lines-per-function
 module.exports = function toSpliced(start, deleteCount) {
 	var O = ToObject(this); // step 1
 	var len = LengthOfArrayLike(O); // step 2
@@ -54,27 +54,29 @@ module.exports = function toSpliced(start, deleteCount) {
 		throw new $TypeError('Length exceeded the maximum array length');
 	}
 	var A = ArrayCreate(newLen); // step 13
-	var k = 0; // step 14
-	while (k < actualStart) { // step 15
-		var Pk = ToString(k);
-		var kValue = Get(O, Pk);
-		CreateDataPropertyOrThrow(A, Pk, kValue);
-		k += 1;
+	var i = 0; // step 14
+	var r = actualStart + actualDeleteCount; // step 15
+	while (i < actualStart) { // step 16
+		var Pi = ToString(i);
+		var iValue = Get(O, Pi);
+		CreateDataPropertyOrThrow(A, Pi, iValue);
+		i += 1;
 	}
 	/* eslint no-shadow: 1, no-redeclare: 1 */
-	forEach(items, function (E) { // step 16
-		var Pk = ToString(k);
-		CreateDataPropertyOrThrow(A, Pk, E);
-		k += 1;
+	forEach(items, function (E) { // step 17
+		var Pi = ToString(i);
+		CreateDataPropertyOrThrow(A, Pi, E);
+		i += 1;
 	});
 
-	while (k < newLen) { // step 17
-		var Pk = ToString(k);
-		var from = ToString(k + actualDeleteCount - insertCount);
+	while (i < newLen) { // step 18
+		var Pi = ToString(i);
+		var from = ToString(r);
 		var fromValue = Get(O, from);
-		CreateDataPropertyOrThrow(A, Pk, fromValue);
-		k += 1;
+		CreateDataPropertyOrThrow(A, Pi, fromValue);
+		i += 1;
+		r += 1;
 	}
 
-	return A; // step 18
+	return A; // step 19
 };
