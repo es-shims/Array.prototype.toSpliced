@@ -1,5 +1,7 @@
 'use strict';
 
+var has = require('has');
+
 var canDistinguishSparseFromUndefined = 0 in [undefined]; // IE 6 - 8 have a bug where this returns false.
 
 function testSplice(t, toSpliced, input, args, expected, msg) {
@@ -167,7 +169,119 @@ module.exports = function (toSpliced, t) {
 		st.end();
 	});
 
-	t.test('too-large length', function (st) {
+	t.deepEqual(toSpliced({ length: '2', 0: 0, 1: 1, 2: 2 }, 0, 0), [0, 1]);
+
+	var arrayLikeLengthValueOf = {
+		length: {
+			valueOf: function () { return 2; }
+		},
+		0: 0,
+		1: 1,
+		2: 2
+	};
+	t.deepEqual(toSpliced(arrayLikeLengthValueOf, 0, 0), [0, 1]);
+
+	t.test('not positive integer lengths', function (st) {
+		st.deepEqual(toSpliced({ length: -2 }), []);
+		st.deepEqual(toSpliced({ length: 'dog' }), []);
+		st.deepEqual(toSpliced({ length: NaN }), []);
+
+		st.end();
+	});
+
+	t.deepEqual(toSpliced(['first', 'second', 'third'], 1), ['first']);
+	t.deepEqual(toSpliced(['first', 'second', 'third']), ['first', 'second', 'third']);
+	t.deepEqual(toSpliced(['first', 'second', 'third'], 1, undefined), ['first', 'second', 'third']);
+	t.deepEqual(toSpliced(['first', 'second', 'third'], undefined, undefined), ['first', 'second', 'third']);
+
+	t.deepEqual(
+		toSpliced([0, 1, 2, 3, 4], 10, 1, 5, 6),
+		[0, 1, 2, 3, 4, 5, 6],
+		'start-bigger-than-length'
+	);
+	t.deepEqual(
+		toSpliced([0, 1, 2, 3, 4], -Infinity, 2),
+		[2, 3, 4],
+		'start-neg-infinity-is-zero'
+	);
+	t.deepEqual(
+		toSpliced([0, 1, 2, 3, 4], -20, 2),
+		[2, 3, 4],
+		'start-neg-less-than-minus-length-is-zero'
+	);
+	t.deepEqual(
+		toSpliced([0, 1, 2, 3, 4], -3, 2),
+		[0, 1, 4],
+		'start-neg-subtracted-from-length'
+	);
+
+	t.test('too-large lengths', function (st) {
+		var arrayLike = {
+			9007199254740989: Math.pow(2, 53) - 3,
+			9007199254740990: Math.pow(2, 53) - 2,
+			9007199254740991: Math.pow(2, 53) - 1,
+			9007199254740992: Math.pow(2, 53),
+			9007199254740994: Math.pow(2, 53) + 2, // NOTE: 2 ** 53 + 1 is 2 ** 53
+			length: Math.pow(2, 53) + 20
+		};
+
+		var result = toSpliced(arrayLike, 0, Math.pow(2, 53) - 3);
+		st.equal(result.length, 2);
+		st.deepEqual(result, [Math.pow(2, 53) - 3, Math.pow(2, 53) - 2]);
+
+		var arrayLike2 = {
+			0: 0,
+			4294967295: 4294967295,
+			4294967296: 4294967296,
+			length: Math.pow(2, 32)
+		};
+		st['throws'](
+			function () { toSpliced(arrayLike2, 0, 0); },
+			RangeError
+		);
+
+		arrayLike2.length = Math.pow(2, 32) - 1;
+		st['throws'](
+			function () { toSpliced(arrayLike2, 0, 0, 1); },
+			RangeError
+		);
+
+		arrayLike2.length = Math.pow(2, 32);
+		st['throws'](
+			function () { toSpliced(arrayLike2, 0, 0, 1); },
+			RangeError
+		);
+
+		arrayLike2.length = Math.pow(2, 32) + 1;
+		st['throws'](
+			function () { toSpliced(arrayLike2, 0, 0, 1); },
+			RangeError
+		);
+
+		arrayLike2.length = Math.pow(2, 52) - 2;
+		st['throws'](
+			function () { toSpliced(arrayLike2, 0, 0, 1); },
+			RangeError
+		);
+
+		arrayLike2.length = Math.pow(2, 53) - 1;
+		st['throws'](
+			function () { toSpliced(arrayLike2, 0, 0, 1); },
+			TypeError
+		);
+
+		arrayLike2.length = Math.pow(2, 53);
+		st['throws'](
+			function () { toSpliced(arrayLike2, 0, 0, 1); },
+			TypeError
+		);
+
+		arrayLike2.length = Math.pow(2, 53) + 1;
+		st['throws'](
+			function () { toSpliced(arrayLike2, 0, 0, 1); },
+			TypeError
+		);
+
 		st['throws'](
 			function () { toSpliced({ length: Math.pow(2, 53) - 1 }, 0, 0, 1); },
 			TypeError,
@@ -178,6 +292,149 @@ module.exports = function (toSpliced, t) {
 			function () { toSpliced({ length: Math.pow(2, 32) - 1 }, 0, 0, 1); },
 			RangeError,
 			'throws the proper kind of error for [2**32, 2**53]'
+		);
+
+		st.end();
+	});
+
+	t.deepEqual(toSpliced(true), [], 'true yields empty array');
+	t.deepEqual(toSpliced(false), [], 'false yields empty array');
+
+	t.test('deleteCount-clamped-between-zero-and-remaining-count', function (st) {
+		st.deepEqual(
+			toSpliced([0, 1, 2, 3, 4, 5], 2, -1),
+			[0, 1, 2, 3, 4, 5]
+		);
+
+		st.deepEqual(
+			toSpliced([0, 1, 2, 3, 4, 5], -4, -1),
+			[0, 1, 2, 3, 4, 5]
+		);
+
+		st.deepEqual(
+			toSpliced([0, 1, 2, 3, 4, 5], 2, 6),
+			[0, 1]
+		);
+
+		st.deepEqual(
+			toSpliced([0, 1, 2, 3, 4, 5], -4, 6),
+			[0, 1]
+		);
+
+		st.end();
+	});
+
+	t.test('getters', { skip: !Object.defineProperty }, function (st) {
+		var arrayLike = {
+			0: 'a',
+			1: 'b',
+			2: null,
+			3: 'c',
+			length: 4
+		};
+		Object.defineProperty(arrayLike, 2, {
+			get: function () { throw new SyntaxError(); }
+		});
+		st.deepEqual(
+			toSpliced(arrayLike, 2, 1),
+			['a', 'b', 'c'],
+			'index 2 is not invoked'
+		);
+
+		var order = [];
+		var arrayLike2 = {
+			0: 'a',
+			1: 'b',
+			2: 'none',
+			3: 'c',
+			length: 4
+		};
+		Object.defineProperty(arrayLike2, 0, {
+			get: function () {
+				order.push(0);
+				return 'a';
+			}
+		});
+		Object.defineProperty(arrayLike2, 1, {
+			get: function () {
+				order.push(1);
+				return 'b';
+			}
+		});
+		Object.defineProperty(arrayLike2, 3, {
+			get: function () {
+				order.push(3);
+				return 'c';
+			}
+		});
+
+		st.deepEqual(
+			toSpliced(arrayLike2, 2, 1),
+			['a', 'b', 'c'],
+			'splicing works as expected'
+		);
+		st.deepEqual(
+			order,
+			[0, 1, 3],
+			'indexes are Get-ed in expected order'
+		);
+
+		st.test('length-decreased-while-iterating', function (s2t) {
+			var arr = [0, 1, 2, 3, 4, 5];
+			Array.prototype[3] = 6; // eslint-disable-line no-extend-native
+			s2t.teardown(function () {
+				delete Array.prototype[3];
+			});
+			Object.defineProperty(arr, '2', {
+				get: function () {
+					arr.length = 1;
+					return 2;
+				}
+			});
+
+			s2t.deepEqual(toSpliced(arr, 0, 0), [0, 1, 2, 6, undefined, undefined]);
+
+			s2t.end();
+		});
+
+		st.test('length-increased-while-iterating', function (s2t) {
+			var arr = [0, 1, 2];
+			Object.defineProperty(arr, '0', {
+				get: function () {
+					arr.push(10);
+					return 0;
+				}
+			});
+			Object.defineProperty(arr, '2', {
+				get: function () {
+					arr.push(11);
+					return 2;
+				}
+			});
+
+			s2t.deepEqual(toSpliced(arr, 1, 0, 0.5), [0, 0.5, 1, 2]);
+
+			s2t.end();
+		});
+
+		st.end();
+	});
+
+	t.test('holes', function (st) {
+		var arr = [0, /* hole */, 2, /* hole */, 4]; // eslint-disable-line no-sparse-arrays
+		Array.prototype[3] = 3; // eslint-disable-line no-extend-native
+		st.teardown(function () {
+			delete Array.prototype[3];
+		});
+
+		var spliced = toSpliced(arr, 0, 0);
+		st.deepEqual(spliced, [0, undefined, 2, 3, 4]);
+		st.ok(has(spliced, 1));
+		st.ok(has(spliced, 3));
+
+		st.deepEqual(
+			toSpliced(arr, 0, 0, -1),
+			[-1, 0, undefined, 2, 3, 4]
 		);
 
 		st.end();
