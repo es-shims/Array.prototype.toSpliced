@@ -1,6 +1,7 @@
 'use strict';
 
 var has = require('has');
+var mockProperty = require('mock-property');
 
 var canDistinguishSparseFromUndefined = 0 in [undefined]; // IE 6 - 8 have a bug where this returns false.
 
@@ -381,10 +382,7 @@ module.exports = function (toSpliced, t) {
 
 		st.test('length-decreased-while-iterating', function (s2t) {
 			var arr = [0, 1, 2, 3, 4, 5];
-			Array.prototype[3] = 6; // eslint-disable-line no-extend-native
-			s2t.teardown(function () {
-				delete Array.prototype[3];
-			});
+			s2t.teardown(mockProperty(Array.prototype, 3, { value: 6 }));
 			Object.defineProperty(arr, '2', {
 				get: function () {
 					arr.length = 1;
@@ -422,10 +420,7 @@ module.exports = function (toSpliced, t) {
 
 	t.test('holes', function (st) {
 		var arr = [0, /* hole */, 2, /* hole */, 4]; // eslint-disable-line no-sparse-arrays
-		Array.prototype[3] = 3; // eslint-disable-line no-extend-native
-		st.teardown(function () {
-			delete Array.prototype[3];
-		});
+		st.teardown(mockProperty(Array.prototype, 3, { value: 3 }));
 
 		var spliced = toSpliced(arr, 0, 0);
 		st.deepEqual(spliced, [0, undefined, 2, 3, 4]);
