@@ -5,6 +5,18 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [v1.1.0](https://github.com/es-shims/Array.prototype.toSpliced/compare/v1.0.0...v1.1.0) - 2022-08-14
+
+### Commits
+
+- [Tests] add coverage from https://github.com/tc39/test262/pull/3464 [`0d252a3`](https://github.com/es-shims/Array.prototype.toSpliced/commit/0d252a3cf44a562967399339347fa23f5308f6b5)
+- [meta] use `npmignore` to autogenerate an npmignore file [`dc41f03`](https://github.com/es-shims/Array.prototype.toSpliced/commit/dc41f0314e8c02e67d2c2ff35d3362ad62b6daf4)
+- [Tests] use `mock-property` [`0777ebf`](https://github.com/es-shims/Array.prototype.toSpliced/commit/0777ebf4634b78af9906d23c3444d4a646d0fc24)
+- [New] `shim`/`auto`: add `toSpliced` to `Symbol.unscopables` [`c4a807f`](https://github.com/es-shims/Array.prototype.toSpliced/commit/c4a807f28668763cd255b157ba2afffc613b6de1)
+- [Deps] update `define-properties`, `es-abstract`, `get-intrinsic` [`28208f3`](https://github.com/es-shims/Array.prototype.toSpliced/commit/28208f3ada285cc67ffc6511cf193b9546937d6b)
+- [Dev Deps] update `@ljharb/eslint-config`, `functions-have-names`, `tape` [`20de12c`](https://github.com/es-shims/Array.prototype.toSpliced/commit/20de12c6833e43ec44b63bcbd80a375fa879a5dc)
+- [readme] fix link to spec [`7a178a6`](https://github.com/es-shims/Array.prototype.toSpliced/commit/7a178a68932beded6e15c0caa8ff4611e96e446f)
+
 ## v1.0.0 - 2022-03-31
 
 ### Commits
