@@ -415,6 +415,33 @@ module.exports = function (toSpliced, t) {
 			s2t.end();
 		});
 
+		st.test('mutate-while-iterating', function (s2t) {
+			var arr = [0, 1, 2, 3];
+			var zerothElementStorage = arr[0];
+			Object.defineProperty(arr, '0', {
+				get: function () {
+					arr[1] = 42;
+					return zerothElementStorage;
+				},
+				set: function (v) {
+					zerothElementStorage = v;
+				}
+			});
+			Object.defineProperty(arr, '2', {
+				get: function () {
+					arr[0] = 17;
+					arr[3] = 37;
+					return 2;
+				}
+			});
+			s2t.deepEqual(
+				toSpliced(arr, 1, 0, 0.5),
+				[0, 0.5, 42, 2, 37]
+			);
+
+			s2t.end();
+		});
+
 		st.end();
 	});
 
