@@ -5,6 +5,15 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [v1.1.1](https://github.com/es-shims/Array.prototype.toSpliced/compare/v1.1.0...v1.1.1) - 2022-11-03
+
+### Commits
+
+- [Tests] add a passing test262 test [`321a21a`](https://github.com/es-shims/Array.prototype.toSpliced/commit/321a21a52af37a237f6d09cfa2c7027b427c86c3)
+- [Deps] update `es-abstract`, `get-intrinsic` [`c91b852`](https://github.com/es-shims/Array.prototype.toSpliced/commit/c91b852b2bedfaa20a79297afc012737a82907b9)
+- [actions] update rebase action to use reusable workflow [`fb2ac61`](https://github.com/es-shims/Array.prototype.toSpliced/commit/fb2ac618bc106d787bcde4c00a45683121c9cdf1)
+- [Dev Deps] update `aud`, `tape` [`2732744`](https://github.com/es-shims/Array.prototype.toSpliced/commit/27327446dbfb7078b1978365483c0e35036a669d)
+
 ## [v1.1.0](https://github.com/es-shims/Array.prototype.toSpliced/compare/v1.0.0...v1.1.0) - 2022-08-14
 
 ### Commits
