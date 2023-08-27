@@ -3,20 +3,20 @@
 var callBound = require('call-bind/callBound');
 var GetIntrinsic = require('get-intrinsic');
 
-var ArrayCreate = require('es-abstract/2022/ArrayCreate');
-var clamp = require('es-abstract/2022/clamp');
-var CreateDataPropertyOrThrow = require('es-abstract/2022/CreateDataPropertyOrThrow');
-var Get = require('es-abstract/2022/Get');
-var LengthOfArrayLike = require('es-abstract/2022/LengthOfArrayLike');
-var ToIntegerOrInfinity = require('es-abstract/2022/ToIntegerOrInfinity');
-var ToObject = require('es-abstract/2022/ToObject');
-var ToString = require('es-abstract/2022/ToString');
+var ArrayCreate = require('es-abstract/2023/ArrayCreate');
+var clamp = require('es-abstract/2023/clamp');
+var CreateDataPropertyOrThrow = require('es-abstract/2023/CreateDataPropertyOrThrow');
+var Get = require('es-abstract/2023/Get');
+var LengthOfArrayLike = require('es-abstract/2023/LengthOfArrayLike');
+var ToIntegerOrInfinity = require('es-abstract/2023/ToIntegerOrInfinity');
+var ToObject = require('es-abstract/2023/ToObject');
+var ToString = require('es-abstract/2023/ToString');
 
 var forEach = require('es-abstract/helpers/forEach');
+var $MAX_SAFE_INTEGER = require('es-abstract/helpers/maxSafeInteger');
 
 var max = GetIntrinsic('%Math.max%');
 var min = GetIntrinsic('%Math.min%');
-var $MAX_SAFE_INTEGER = require('es-abstract/helpers/maxSafeInteger');
 var $TypeError = GetIntrinsic('%TypeError%');
 
 var $slice = callBound('Array.prototype.slice');
