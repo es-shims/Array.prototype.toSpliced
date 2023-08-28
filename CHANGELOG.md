@@ -5,6 +5,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [v1.1.2](https://github.com/es-shims/Array.prototype.toSpliced/compare/v1.1.1...v1.1.2) - 2023-08-28
+
+### Commits
+
+- [Deps] update `define-properties`, `es-abstract`, `get-intrinsic` [`9bda002`](https://github.com/es-shims/Array.prototype.toSpliced/commit/9bda002a30377593a1f35dab67d9aeb122915b77)
+- [Dev Deps] update `@es-shims/api`, `@ljharb/eslint-config`, `aud`, `tape` [`9c7622b`](https://github.com/es-shims/Array.prototype.toSpliced/commit/9c7622b0d6bb6b7c4825755f1e0962ccab48b5c5)
+
 ## [v1.1.1](https://github.com/es-shims/Array.prototype.toSpliced/compare/v1.1.0...v1.1.1) - 2022-11-03
 
 ### Commits
