@@ -1,6 +1,6 @@
 'use strict';
 
-var has = require('has');
+var hasOwn = require('hasown');
 var mockProperty = require('mock-property');
 
 var canDistinguishSparseFromUndefined = 0 in [undefined]; // IE 6 - 8 have a bug where this returns false.
@@ -451,8 +451,8 @@ module.exports = function (toSpliced, t) {
 
 		var spliced = toSpliced(arr, 0, 0);
 		st.deepEqual(spliced, [0, undefined, 2, 3, 4]);
-		st.ok(has(spliced, 1));
-		st.ok(has(spliced, 3));
+		st.ok(hasOwn(spliced, 1));
+		st.ok(hasOwn(spliced, 3));
 
 		st.deepEqual(
 			toSpliced(arr, 0, 0, -1),
