@@ -5,6 +5,17 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [v1.1.3](https://github.com/es-shims/Array.prototype.toSpliced/compare/v1.1.2...v1.1.3) - 2024-02-04
+
+### Commits
+
+- [Deps] update `call-bind`, `define-properties`, `es-abstract`, `es-shim-unscopables`, `get-intrinsic` [`092514b`](https://github.com/es-shims/Array.prototype.toSpliced/commit/092514bf35fe74615c9247ee6565d05da6c0dbb6)
+- [Dev Deps] use `hasown` instead of `has` [`9bbb5ee`](https://github.com/es-shims/Array.prototype.toSpliced/commit/9bbb5ee6d42711857229b7309cbe7d78a4317aa5)
+- [Dev Deps] update `aud`, `npmignore`, `tape` [`22a5165`](https://github.com/es-shims/Array.prototype.toSpliced/commit/22a51658b7b1e398123fb12e64b7fe9fc82f4585)
+- [Dev Deps] update `mock-property`, `tape` [`07401a6`](https://github.com/es-shims/Array.prototype.toSpliced/commit/07401a6c53181865dcfb758f7b9604d81c075725)
+- [Refactor] use `es-errors` where possible, so things that only need those do not need `get-intrinsic` [`566b616`](https://github.com/es-shims/Array.prototype.toSpliced/commit/566b616c9e21203f20eadd50dd7e51102a8cc709)
+- [Deps] update `get-intrinsic` [`5fdf845`](https://github.com/es-shims/Array.prototype.toSpliced/commit/5fdf84572a316e6505e9e43c38756271361e393d)
+
 ## [v1.1.2](https://github.com/es-shims/Array.prototype.toSpliced/compare/v1.1.1...v1.1.2) - 2023-08-28
 
 ### Commits
