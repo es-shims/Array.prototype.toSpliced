@@ -67,7 +67,7 @@
 		"define-properties": "^1.2.1",
 		"es-abstract": "^1.22.3",
 		"es-shim-unscopables": "^1.0.2",
-		"get-intrinsic": "^1.2.2"
+		"get-intrinsic": "^1.2.3"
 	},
 	"auto-changelog": {
 		"output": "CHANGELOG.md",
