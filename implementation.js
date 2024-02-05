@@ -2,6 +2,7 @@
 
 var callBound = require('call-bind/callBound');
 var GetIntrinsic = require('get-intrinsic');
+var $TypeError = require('es-errors/type');
 
 var ArrayCreate = require('es-abstract/2023/ArrayCreate');
 var clamp = require('es-abstract/2023/clamp');
@@ -17,7 +18,6 @@ var $MAX_SAFE_INTEGER = require('es-abstract/helpers/maxSafeInteger');
 
 var max = GetIntrinsic('%Math.max%');
 var min = GetIntrinsic('%Math.min%');
-var $TypeError = GetIntrinsic('%TypeError%');
 
 var $slice = callBound('Array.prototype.slice');
 
