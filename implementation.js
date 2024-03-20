@@ -4,14 +4,14 @@ var callBound = require('call-bind/callBound');
 var GetIntrinsic = require('get-intrinsic');
 var $TypeError = require('es-errors/type');
 
-var ArrayCreate = require('es-abstract/2023/ArrayCreate');
-var clamp = require('es-abstract/2023/clamp');
-var CreateDataPropertyOrThrow = require('es-abstract/2023/CreateDataPropertyOrThrow');
-var Get = require('es-abstract/2023/Get');
-var LengthOfArrayLike = require('es-abstract/2023/LengthOfArrayLike');
-var ToIntegerOrInfinity = require('es-abstract/2023/ToIntegerOrInfinity');
+var ArrayCreate = require('es-abstract/2024/ArrayCreate');
+var clamp = require('es-abstract/2024/clamp');
+var CreateDataPropertyOrThrow = require('es-abstract/2024/CreateDataPropertyOrThrow');
+var Get = require('es-abstract/2024/Get');
+var LengthOfArrayLike = require('es-abstract/2024/LengthOfArrayLike');
+var ToIntegerOrInfinity = require('es-abstract/2024/ToIntegerOrInfinity');
 var ToObject = require('es-object-atoms/ToObject');
-var ToString = require('es-abstract/2023/ToString');
+var ToString = require('es-abstract/2024/ToString');
 
 var forEach = require('es-abstract/helpers/forEach');
 var $MAX_SAFE_INTEGER = require('es-abstract/helpers/maxSafeInteger');
