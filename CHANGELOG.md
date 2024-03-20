@@ -5,6 +5,16 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [v1.1.4](https://github.com/es-shims/Array.prototype.toSpliced/compare/v1.1.3...v1.1.4) - 2024-03-20
+
+### Commits
+
+- [actions] use reusable workflows [`1c4c03a`](https://github.com/es-shims/Array.prototype.toSpliced/commit/1c4c03acfe307c917a6506d924b45b0e34936cdb)
+- [Deps] update `call-bind`, `es-abstract`, `es-errors`, `get-intrinsic` [`39027ed`](https://github.com/es-shims/Array.prototype.toSpliced/commit/39027ed851e9085220c2c02ad6510639fc7e1275)
+- [Dev Deps] update `hasown`, `tape` [`2d1f421`](https://github.com/es-shims/Array.prototype.toSpliced/commit/2d1f42133ae35a105737f5d6a59a45d209841e7e)
+- [meta] add missing `engines.node` [`a4f30e3`](https://github.com/es-shims/Array.prototype.toSpliced/commit/a4f30e3f5e2e93cf9d7d9a2d90cbf56a13e5296c)
+- [Refactor] use `es-object-atoms` where possible [`60d77f1`](https://github.com/es-shims/Array.prototype.toSpliced/commit/60d77f1022756f9a07f35580e5456ddba0773b52)
+
 ## [v1.1.3](https://github.com/es-shims/Array.prototype.toSpliced/compare/v1.1.2...v1.1.3) - 2024-02-04
 
 ### Commits
