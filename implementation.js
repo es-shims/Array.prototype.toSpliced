@@ -10,7 +10,7 @@ var CreateDataPropertyOrThrow = require('es-abstract/2023/CreateDataPropertyOrTh
 var Get = require('es-abstract/2023/Get');
 var LengthOfArrayLike = require('es-abstract/2023/LengthOfArrayLike');
 var ToIntegerOrInfinity = require('es-abstract/2023/ToIntegerOrInfinity');
-var ToObject = require('es-abstract/2023/ToObject');
+var ToObject = require('es-object-atoms/ToObject');
 var ToString = require('es-abstract/2023/ToString');
 
 var forEach = require('es-abstract/helpers/forEach');
