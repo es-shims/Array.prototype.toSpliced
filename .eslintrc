@@ -10,7 +10,6 @@
 				"ArrayCreate",
 				"CreateDataPropertyOrThrow",
 				"Get",
-				"GetIntrinsic",
 				"LengthOfArrayLike",
 				"ToIntegerOrInfinity",
 				"ToObject",

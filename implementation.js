@@ -1,7 +1,6 @@
 'use strict';
 
 var callBound = require('call-bound');
-var GetIntrinsic = require('get-intrinsic');
 var $TypeError = require('es-errors/type');
 
 var ArrayCreate = require('es-abstract/2024/ArrayCreate');
@@ -16,8 +15,8 @@ var ToString = require('es-abstract/2024/ToString');
 var forEach = require('es-abstract/helpers/forEach');
 var $MAX_SAFE_INTEGER = require('es-abstract/helpers/maxSafeInteger');
 
-var max = GetIntrinsic('%Math.max%');
-var min = GetIntrinsic('%Math.min%');
+var max = require('math-intrinsics/max');
+var min = require('math-intrinsics/min');
 
 var $slice = callBound('Array.prototype.slice');
 
