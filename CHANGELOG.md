@@ -5,6 +5,18 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [v1.1.5](https://github.com/es-shims/Array.prototype.toSpliced/compare/v1.1.4...v1.1.5) - 2024-12-17
+
+### Commits
+
+- [actions] split out node 10-20, and 20+ [`c6386f7`](https://github.com/es-shims/Array.prototype.toSpliced/commit/c6386f74ae2b29a70997d887404af717e352433a)
+- [Dev Deps] update `@es-shims/api`, `@ljharb/eslint-config`, `auto-changelog`, `mock-property`, `tape` [`17d0270`](https://github.com/es-shims/Array.prototype.toSpliced/commit/17d0270c3c5e438c71076ef3c105ccf1c9f7bc04)
+- [Refactor] use `math-intrinsics` directly [`803b934`](https://github.com/es-shims/Array.prototype.toSpliced/commit/803b9343448c62ba8321aabe27b0e9d3de13cd87)
+- [Deps] update `call-bind`, `es-abstract`, `get-intrinsic` [`cae48a4`](https://github.com/es-shims/Array.prototype.toSpliced/commit/cae48a4a2714663af87f47b6ed6e1f56006a0343)
+- [Refactor] use `call-bound` directly [`d5cc382`](https://github.com/es-shims/Array.prototype.toSpliced/commit/d5cc3828fcd61bcb62be24129c5e4af80f9761a8)
+- [Tests] replace `aud` with `npm audit` [`a0fd3b3`](https://github.com/es-shims/Array.prototype.toSpliced/commit/a0fd3b385bd1f4b739c7885dd00a332305255bb3)
+- [Dev Deps] add missing peer dep [`7f944a9`](https://github.com/es-shims/Array.prototype.toSpliced/commit/7f944a9151e2a4f5b66e7dde9a0a0b60fabb7ce0)
+
 ## [v1.1.4](https://github.com/es-shims/Array.prototype.toSpliced/compare/v1.1.3...v1.1.4) - 2024-03-20
 
 ### Commits
